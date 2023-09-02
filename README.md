@@ -1,66 +1,73 @@
-## Foundry
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+# PasswordStore
 
-Foundry consists of:
+A smart contract applicatoin for storing a password. Users should be able to store a password and then retrieve it later. Others should not be able to access the password. 
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- [PasswordStore](#passwordstore)
+- [Getting Started](#getting-started)
+  - [Requirements](#requirements)
+  - [Quickstart](#quickstart)
+    - [Optional Gitpod](#optional-gitpod)
+- [Usage](#usage)
+  - [Deploy (local)](#deploy-local)
+  - [Testing](#testing)
+    - [Test Coverage](#test-coverage)
 
-## Documentation
+# Getting Started
 
-https://book.getfoundry.sh/
+## Requirements
 
-## Usage
+- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+  - You'll know you did it right if you can run `git --version` and you see a response like `git version x.x.x`
+- [foundry](https://getfoundry.sh/)
+  - You'll know you did it right if you can run `forge --version` and you see a response like `forge 0.2.0 (816e00b 2023-03-16T00:05:26.396218Z)`
 
-### Build
+## Quickstart
 
-```shell
-$ forge build
+```
+git clone https://github.com/Cyfrin/3-passwordstore-audit
+cd 3-passwordstore-audit
+forge build
 ```
 
-### Test
+### Optional Gitpod
 
-```shell
-$ forge test
+If you can't or don't want to run and install locally, you can work with this repo in Gitpod. If you do this, you can skip the `clone this repo` part.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/Cyfrin/3-passwordstore-audit)
+
+# Usage
+
+## Deploy (local)
+
+1. Start a local node
+
+```
+make anvil
 ```
 
-### Format
+2. Deploy
 
-```shell
-$ forge fmt
+This will default to your local node. You need to have it running in another terminal in order for it to deploy.
+
+```
+make deploy
 ```
 
-### Gas Snapshots
+## Testing
 
-```shell
-$ forge snapshot
+```
+forge test
 ```
 
-### Anvil
+### Test Coverage
 
-```shell
-$ anvil
+```
+forge coverage
 ```
 
-### Deploy
+and for coverage based testing: 
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
 ```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+forge coverage --report debug
 ```
