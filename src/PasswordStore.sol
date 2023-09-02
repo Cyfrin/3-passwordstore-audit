@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.18;
 
-import {console} from "forge-std/console.sol";
-
 /*
  * @author not-so-secure-dev
  * @title PasswordStore
@@ -19,7 +17,6 @@ contract PasswordStore {
 
     constructor() {
         s_owner = msg.sender;
-        console.log(s_owner);
     }
 
     /*
