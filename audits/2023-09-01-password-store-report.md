@@ -48,6 +48,7 @@ Assisting Auditors:
 - [Audit Details](#audit-details)
   - [Scope](#scope)
 - [Protocol Summary](#protocol-summary)
+  - [Roles](#roles)
 - [Executive Summary](#executive-summary)
   - [Issues found](#issues-found)
 - [Findings](#findings)
@@ -91,6 +92,12 @@ src/
 # Protocol Summary 
 
 PasswordStore is a protocol dedicated to storage and retrieval of a user's passwords. The protocol is designed to be used by a single user, and is not designed to be used by multiple users. Only the owner should be able to set and access this password. 
+
+## Roles
+
+- Owner: Is the only one who should be able to set and access the password.
+
+For this contract, only the owner should be able to interact with the contract.
 
 # Executive Summary
 

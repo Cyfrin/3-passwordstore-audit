@@ -12,6 +12,8 @@ A smart contract applicatoin for storing a password. Users should be able to sto
   - [Deploy (local)](#deploy-local)
   - [Testing](#testing)
     - [Test Coverage](#test-coverage)
+- [Audit Scope Details](#audit-scope-details)
+  - [Create the audit report](#create-the-audit-report)
 
 # Getting Started
 
@@ -70,4 +72,24 @@ and for coverage based testing:
 
 ```
 forge coverage --report debug
+```
+
+# Audit Scope Details
+
+- Commit Hash:  2e8f81e263b3a9d18fab4fb5c46805ffc10a9990
+- In Scope:
+```
+./src/
+└── PasswordStore.sol
+```
+- Solc Version: 0.8.18
+- Chain(s) to deploy contract to: Ethereum
+
+## Create the audit report
+
+View the [audit-report-templating](https://github.com/Cyfrin/audit-report-templating) repo to install all dependencies. 
+
+```bash
+cd audits
+pandoc 2023-09-01-password-store-report.md -o report.pdf --from markdown --template=eisvogel --listings
 ```
