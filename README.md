@@ -13,13 +13,12 @@ A smart contract applicatoin for storing a password. Users should be able to sto
 - [Getting Started](#getting-started)
   - [Requirements](#requirements)
   - [Quickstart](#quickstart)
-    - [Optional Gitpod](#optional-gitpod)
 - [Usage](#usage)
   - [Deploy (local)](#deploy-local)
   - [Testing](#testing)
     - [Test Coverage](#test-coverage)
 - [Audit Scope Details](#audit-scope-details)
-  - [Create the audit report](#create-the-audit-report)
+  - [Roles](#roles)
 
 # Getting Started
 
@@ -37,12 +36,6 @@ git clone https://github.com/Cyfrin/3-passwordstore-audit
 cd 3-passwordstore-audit
 forge build
 ```
-
-### Optional Gitpod
-
-If you can't or don't want to run and install locally, you can work with this repo in Gitpod. If you do this, you can skip the `clone this repo` part.
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/Cyfrin/3-passwordstore-audit)
 
 # Usage
 
@@ -91,11 +84,8 @@ forge coverage --report debug
 - Solc Version: 0.8.18
 - Chain(s) to deploy contract to: Ethereum
 
-## Create the audit report
+## Roles
 
-View the [audit-report-templating](https://github.com/Cyfrin/audit-report-templating) repo to install all dependencies. 
+- Owner: The user who can set the password and read the password.
+- Outsides: No one else should be able to set or read the password.
 
-```bash
-cd audits
-pandoc 2023-09-01-password-store-report.md -o report.pdf --from markdown --template=eisvogel --listings
-```
