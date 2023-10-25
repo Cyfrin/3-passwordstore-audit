@@ -120,7 +120,7 @@ For this contract, only the owner should be able to interact with the contract.
 
 **Description:** All data stored on-chain is visible to anyone, and can be read directly from the blockchain. The `PasswordStore::s_password` variable is intended to be a private variable, and only accessed through the `PasswordStore::getPassword` function, which is intended to be only called by the owner of the contract. 
 
-However, anyone can direclty read this using any number of 
+However, anyone can direclty read this using any number of off chain methodologies
 
 **Impact:** The password is not private. 
 
