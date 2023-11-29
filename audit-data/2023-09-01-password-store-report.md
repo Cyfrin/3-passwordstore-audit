@@ -55,6 +55,15 @@ Assisting Auditors:
   - [High](#high)
     - [\[H-1\] Passwords stored on-chain are visable to anyone, not matter solidity variable visibility](#h-1-passwords-stored-on-chain-are-visable-to-anyone-not-matter-solidity-variable-visibility)
     - [\[H-2\] `PasswordStore::setPassword` is callable by anyone](#h-2-passwordstoresetpassword-is-callable-by-anyone)
+- [Low Risk Findings](#low-risk-findings)
+  - [L-01. Initialization Timeframe Vulnerability](#l-01-initialization-timeframe-vulnerability)
+    - [Relevant GitHub Links](#relevant-github-links)
+  - [Summary](#summary)
+  - [Vulnerability Details](#vulnerability-details)
+  - [Impact](#impact)
+  - [Tools Used](#tools-used)
+  - [Recommendations](#recommendations)
+    - [\[I-1\] The `PasswordStore::getPassword` natspec indicates a parameter that doesn't exist, causing the natspec to be incorrect](#i-1-the-passwordstoregetpassword-natspec-indicates-a-parameter-that-doesnt-exist-causing-the-natspec-to-be-incorrect)
 </details>
 </br>
 
@@ -107,8 +116,8 @@ For this contract, only the owner should be able to interact with the contract.
 | ----------------- | ---------------------- |
 | High              | 2                      |
 | Medium            | 0                      |
-| Low               | 0                      |
-| Info              | 0                      |
+| Low               | 1                      |
+| Info              | 1                      |
 | Gas Optimizations | 0                      |
 | Total             | 0                      |
 
@@ -161,7 +170,7 @@ And get an output of:
 myPassword
 ```
 
-**Recommended Mitigation:** Due to this, the overall architecture of the contract should be rethought. One could encrypt the password off-chain, and then store the encrypted password on-chain. This would require the user to remember another password on-chain to decrypt the password. However, you'd also likely want to remove the view function as you wouldn't want the user to accidentally send a transaction with the password that decrypts your password. 
+**Recommended Mitigation:** Due to this, the overall architecture of the contract should be rethought. One could encrypt the password off-chain, and then store the encrypted password on-chain. This would require the user to remember another password off-chain to decrypt the password. However, you'd also likely want to remove the view function as you wouldn't want the user to accidentally send a transaction with the password that decrypts your password. 
 
 
 ### [H-2] `PasswordStore::setPassword` is callable by anyone 
@@ -199,4 +208,55 @@ function test_anyone_can_set_password(address randomAddress) public {
 if (msg.sender != s_owner) {
     revert PasswordStore__NotOwner();
 }
+```
+
+
+# Low Risk Findings
+
+## <a id='L-01'></a>L-01. Initialization Timeframe Vulnerability
+
+_Submitted by [dianivanov](/profile/clo3cuadr0017mp08rvq00v4e)._      
+				
+### Relevant GitHub Links
+	
+https://github.com/Cyfrin/2023-10-PasswordStore/blob/main/src/PasswordStore.sol
+
+## Summary
+The PasswordStore contract exhibits an initialization timeframe vulnerability. This means that there is a period between contract deployment and the explicit call to setPassword during which the password remains in its default state. It's essential to note that even after addressing this issue, the password's public visibility on the blockchain cannot be entirely mitigated, as blockchain data is inherently public as already stated in the "Storing password in blockchain" vulnerability.
+
+## Vulnerability Details
+The contract does not set the password during its construction (in the constructor). As a result, when the contract is initially deployed, the password remains uninitialized, taking on the default value for a string, which is an empty string.
+
+During this initialization timeframe, the contract's password is effectively empty and can be considered a security gap.
+
+## Impact
+The impact of this vulnerability is that during the initialization timeframe, the contract's password is left empty, potentially exposing the contract to unauthorized access or unintended behavior. 
+
+## Tools Used
+No tools used. It was discovered through manual inspection of the contract.
+
+## Recommendations
+To mitigate the initialization timeframe vulnerability, consider setting a password value during the contract's deployment (in the constructor). This initial value can be passed in the constructor parameters.
+
+
+### [I-1] The `PasswordStore::getPassword` natspec indicates a parameter that doesn't exist, causing the natspec to be incorrect
+
+**Description:** 
+
+```javascript
+    /*
+     * @notice This allows only the owner to retrieve the password.
+@>   * @param newPassword The new password to set.
+     */
+    function getPassword() external view returns (string memory) {
+```
+
+The natspec for the function `PasswordStore::getPassword` indicates it should have a parameter with the signature `getPassword(string)`. However, the actual function signature is `getPassword()`.
+
+**Impact:** The natspec is incorrect.
+
+**Recommended Mitigation:** Remove the incorrect natspec line.
+
+```diff
+-     * @param newPassword The new password to set.
 ```

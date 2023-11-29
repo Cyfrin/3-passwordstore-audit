@@ -22,6 +22,7 @@ A smart contract applicatoin for storing a password. Users should be able to sto
 - [Audit Scope Details](#audit-scope-details)
   - [Roles](#roles)
   - [Create the audit report](#create-the-audit-report)
+- [First Flight Winners](#first-flight-winners)
 
 # Getting Started
 
@@ -100,3 +101,12 @@ View the [audit-report-templating](https://github.com/Cyfrin/audit-report-templa
 cd audits
 pandoc 2023-09-01-password-store-report.md -o report.pdf --from markdown --template=eisvogel --listings
 ```
+
+# First Flight Winners
+
+Congrats to:
+- bhvrvt 
+- Ciara
+- Dianivanov 
+
+For top finishes in this [first flight!](https://www.codehawks.com/contests/clnuo221v0001l50aomgo4nyn)
