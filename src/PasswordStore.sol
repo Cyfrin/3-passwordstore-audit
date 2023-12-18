@@ -13,7 +13,7 @@ contract PasswordStore {
     address private s_owner;
     string private s_password;
 
-    event SetNetPassword();
+    event SetNewPassword();
 
     constructor() {
         s_owner = msg.sender;
@@ -25,7 +25,7 @@ contract PasswordStore {
      */
     function setPassword(string memory newPassword) external {
         s_password = newPassword;
-        emit SetNetPassword();
+        emit SetNewPassword();
     }
 
     /*
