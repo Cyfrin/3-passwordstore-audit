@@ -119,7 +119,7 @@ For this contract, only the owner should be able to interact with the contract.
 | Low               | 1                      |
 | Info              | 1                      |
 | Gas Optimizations | 0                      |
-| Total             | 0                      |
+| Total             | 4                      |
 
 # Findings
 
