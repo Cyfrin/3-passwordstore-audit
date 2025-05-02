@@ -8,7 +8,7 @@ pragma solidity 0.8.18;
  * You can update your password at any time.
  */
 contract PasswordStore {
-    error PasswordStore__NotOwner();
+    error PasswordStore__NotOwner;
 
     address private s_owner;
     string private s_password;
