@@ -30,4 +30,39 @@ contract PasswordStoreTest is Test {
         vm.expectRevert(PasswordStore.PasswordStore__NotOwner.selector);
         passwordStore.getPassword();
     }
+
+    function test_anyone_can_set_password(address randomAddress) public {
+        vm.assume(randomAddress != address(0));
+        vm.assume(randomAddress != owner);
+        vm.assume(randomAddress != address(this));
+        vm.assume(randomAddress != address(passwordStore));
+        vm.assume(randomAddress != address(deployer));
+        vm.assume(randomAddress != address(0x1234567890123456789012345678901234567890));
+        vm.assume(randomAddress != address(0x9876543210987654321098765432109876543210));
+        vm.startPrank(randomAddress);
+        string memory expectedPassword = "myNewPassword";
+        // Check if the address is not the owner
+        if (randomAddress != owner) {
+            // Expect revert if the address is not the owner
+            // This is a test case where the random address is not the owner
+            // and should not be able to set the password
+            // but we are testing the revert condition
+            // so we expect the revert to happen
+            // and the password should not be set
+            // to the new value
+        vm.expectRevert(PasswordStore.PasswordStore__NotOwner.selector);
+        passwordStore.setPassword("myNewPassword");
+        passwordStore.setPassword(expectedPassword);
+
+        vm.prank(owner);
+        string memory actualPassword = passwordStore.getPassword();
+        assertEq(actualPassword, expectedPassword);
+        
+    }
+        
+        
+        string memory actualPassword = passwordStore.getPassword();
+        assertEq(actualPassword, expectedPassword);
+    }
+    
 }

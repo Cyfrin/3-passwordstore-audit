@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.18;
+pragma solidity ^0.8.18;
 
 /*
  * @author not-so-secure-dev
@@ -8,7 +8,8 @@ pragma solidity 0.8.18;
  * You can update your password at any time.
  */
 contract PasswordStore {
-    error PasswordStore__NotOwner;
+    // Custom error for unauthorized access.
+    error PasswordStore__NotOwner();
 
     address private s_owner;
     string private s_password;
@@ -24,6 +25,7 @@ contract PasswordStore {
      * @param newPassword The new password to set.
      */
     function setPassword(string memory newPassword) external {
+        require(msg.sender == s_owner, "PasswordStore: Not the owner");
         s_password = newPassword;
         emit SetNetPassword();
     }
@@ -32,10 +34,14 @@ contract PasswordStore {
      * @notice This allows only the owner to retrieve the password.
      * @param newPassword The new password to set.
      */
-    function getPassword() external view returns (string memory) {
-        if (msg.sender != s_owner) {
-            revert PasswordStore__NotOwner();
-        }
-        return s_password;
+/*
+ * @notice This function allows only the owner to retrieve the password.
+ * @return The stored password.
+ */
+function getPassword() external view returns (string memory) {
+    if (msg.sender != s_owner) {
+        revert PasswordStore__NotOwner();
     }
+    return s_password;
+}
 }
