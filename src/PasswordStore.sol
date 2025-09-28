@@ -10,6 +10,7 @@ pragma solidity 0.8.18; // @q Is it the right version of solidity?
 contract PasswordStore {
     error PasswordStore__NotOwner();
 
+    // @audit the owner has declared one time. This variable must be 'immutable'
     address private s_owner;
     // @audit the password is not decrypted and even the private variables can be read in the blockchain!
     string private s_password;
