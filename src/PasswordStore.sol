@@ -17,11 +17,7 @@ contract PasswordStore {
     // @audit the s_password variable is not private, which means that anyone can read the password. We should make it private to ensure that only the owner can access it. It only means that other contracts can't read from it, but human beings can still read it from the blockchain. We should make it private to ensure that only the owner can access it.
     string private s_password;
 
-    /*//////////////////////////////////////////////////////////
-                        EVENTS
-//////////////////////////////////////////////////////////*/
-
-    event SetNetPassword();
+    event SetNewPassword();
 
     constructor() {
         s_owner = msg.sender;
@@ -37,7 +33,7 @@ contract PasswordStore {
     // 🛠@thefix: missing access control, anyone can set the password, which is a security risk. We should add a check to ensure that only the owner can set the password.
     function setPassword(string memory newPassword) external {
         s_password = newPassword;
-        emit SetNetPassword();
+        emit SetNewPassword();
     }
 
     /*

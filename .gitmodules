@@ -1,6 +1,6 @@
 [submodule "lib/foundry-devops"]
 	path = lib/foundry-devops
-	url = https://github.com/chainaccelorg/foundry-devops
+	url = https://github.com/cyfrin/foundry-devops
 [submodule "lib/chainlink-brownie-contracts"]
 	path = lib/chainlink-brownie-contracts
 	url = https://github.com/smartcontractkit/chainlink-brownie-contracts
@@ -10,3 +10,6 @@
 [submodule "lib/openzeppelin-contracts"]
 	path = lib/openzeppelin-contracts
 	url = https://github.com/openzeppelin/openzeppelin-contracts
+[submodule "wtf/lib/forge-std"]
+	path = wtf/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
